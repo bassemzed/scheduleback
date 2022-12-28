@@ -84,13 +84,13 @@ def add_appointment():
     ## adding records to the database
     first_name = request.json['first_name']
     last_name = request.json['last_name']
-    comments = request.json['comments']
-    print(first_name, last_name, comments)
+    title = request.json['title']
+    print(first_name, last_name, title)
 
     new_appointment = Appointment(
         first_name=first_name,
         last_name=last_name,
-        comments=comments,
+        title=title,
         date_time_from=date_time_from,
         date_time_to=date_time_to
     )
@@ -156,7 +156,7 @@ def update_appointments(id:int):
         ## update records to the database
         record.first_name = request.json['first_name']
         record.last_name = request.json['last_name']
-        record.comments = request.json['comments']
+        record.title = request.json['title']
         record.date_time_from = date_time_from
         record.date_time_to = date_time_to
 
@@ -220,14 +220,14 @@ class Appointment(db.Model):
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
-    comments = Column(Text)
+    title = Column(Text)
     date_time_from = Column(DateTime)
     date_time_to = Column(DateTime)
 
 ## Setting up Schema
 class AppointmentSchema(ma.Schema):
     class Meta:
-        fields = ('id','first_name','last_name','comments','date_time_from','date_time_to')
+        fields = ('id','first_name','last_name','title','date_time_from','date_time_to')
 
 ## Instantiate Schema
 ## defining a schema for use if one data or many to deserialize our db
